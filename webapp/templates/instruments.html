@@ -1,0 +1,208 @@
+    {% extends 'base.html' %}
+    {% block title %}
+        Instrument Page
+    {% endblock %}    
+    
+
+
+{% block content %}
+
+        <section class="HPLC">
+                <h2>HPLC</h2>
+                
+                <table >
+                    <thead>
+                        <tr>
+                        <th width=10%>ID</th>
+                        <th width=10%>Current Status</th>
+                        <th >Next Available Date</th>
+                        <th >Cal. Due</th> 
+                        <th width=15%>Details</th> 
+                        <th width=15%>Book</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for hplc in all_HPLCs %}
+                        {% include 'includes/detail_modals.html' %}
+                        <tr>
+                        <td> {{ hplc.ins_name }} </td>
+                        <td><img class="status_img" src="{{ url_for('static', filename='images/red.png') }}"> </td>
+                        <td> {{ hplc.cal_due }}  </td>
+                        <td>In 2 days (Aug. 06)</td>
+                        <td> <button  data-toggle="modal" data-target="#Modal-MoreInfo-{{ hplc.id }}">More Info</button> </td>
+                        <td><button class="btn btn-outline btn-success">Book this Instrument</button></td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                  </table>
+        </section>
+
+        <section class="HPLC">
+            <h2>UPLC</h2>
+            
+            <table >
+                <thead>
+                    <tr>
+                    <th width=10%>ID</th>
+                    <th width=10%>Current Status</th>
+                    <th width=20%>Next Available Date</th>
+                    <th width=20%>Cal. Due</th> 
+                    <th>Details</th> 
+                    <th>Book</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>Jill</td>
+                    <td>Jill</td>
+                    <td>Smith</td>
+                    <td>50</td>
+                    <td>50</td>
+                    <td>50</td>
+                    </tr>
+
+                    <tr>
+                        <td>Jill</td>
+                        <td>Jill</td>
+                        <td>Smith</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>Jill</td>
+                        <td>Jill</td>
+                        <td>Smith</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                    </tr>
+                </tbody>
+              </table>
+    </section>
+
+    <section class="HPLC">
+        <h2>Dissolution Bath</h2>
+        
+        <table >
+            <thead>
+                <tr>
+                <th width=10%>ID</th>
+                <th width=10%>Current Status</th>
+                <th width=20%>Next Available Date</th>
+                <th width=20%>Cal. Due</th> 
+                <th>Details</th> 
+                <th>Book</th> 
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>Jill</td>
+                <td>Jill</td>
+                <td>Smith</td>
+                <td>50</td>
+                <td>50</td>
+                <td>50</td>
+                </tr>
+
+                <tr>
+                    <td>Jill</td>
+                    <td>Jill</td>
+                    <td>Smith</td>
+                    <td>50</td>
+                    <td>50</td>
+                    <td>50</td>
+                </tr>
+
+
+                <tr>
+                    <td>Jill</td>
+                    <td>Jill</td>
+                    <td>Smith</td>
+                    <td>50</td>
+                    <td>50</td>
+                    <td>50</td>
+                </tr>
+            </tbody>
+          </table>
+    </section>
+
+    <section class="HPLC">
+        <h2>Karl Fischer</h2>
+        
+        <table >
+            <thead>
+                <tr>
+                <th width=10%>ID</th>
+                <th width=10%>Current Status</th>
+                <th width=20%>Next Available Date</th>
+                <th width=20%>Cal. Due</th> 
+                <th>Details</th> 
+                <th>Book</th> 
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>Jill</td>
+                <td>Jill</td>
+                <td>Smith</td>
+                <td>50</td>
+                <td>50</td>
+                <td>50</td>
+                </tr>
+
+                <tr>
+                    <td>Jill</td>
+                    <td>Jill</td>
+                    <td>Smith</td>
+                    <td>50</td>
+                    <td>50</td>
+                    <td>50</td>
+                </tr>
+
+
+                <tr>
+                    <td>Jill</td>
+                    <td>Jill</td>
+                    <td>Smith</td>
+                    <td>50</td>
+                    <td>50</td>
+                    <td>50</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+
+    <section class="HPLC">
+        <h5>Legend</h4>
+        <table class='legend'>
+                <tr>
+                <td>Busy:</td>
+                <td><img class="status_img" src="{{ url_for('static', filename='images/red.png') }}"> </td>
+                <td>Available:</td>
+                <td><img class="status_img" src="{{ url_for('static', filename='images/green.png') }}"> </td>
+                <td>Maintiance:</td>
+                <td><img class="status_img" src="{{ url_for('static', filename='images/silver.png') }}"> </td>
+                </tr>
+        </table>
+    </section>
+
+    <!-- <script>
+        // document.getElementById('button').addEventListener("click", function() {
+        //     document.querySelector('.bg-modal').style.display = "flex";
+        // });
+        
+        function detail_function(){
+            document.querySelector('.bg-modal').style.display = "flex";
+        }
+
+        document.querySelector('.close').addEventListener("click", function() {
+            document.querySelector('.bg-modal').style.display = "none";
+        });
+    </script> -->
+{% endblock %}
