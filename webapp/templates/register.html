@@ -5,7 +5,7 @@
 
 {% block content %}
 <body class="text-center">
-    <div class="container">
+    <div class="container" style='margin-top: 20%;'>
         <form method="POST" class="form-register" style="color:white">
             {{ form.hidden_tag() }}
             <h1 class="h3 mb-3 font-weight-normal">
@@ -26,14 +26,18 @@
 
             <br>
 
-            <div class="checkbox mb-3">
-               <h6>Already have an account?</h6>
-               <a class="btn btn-sm btn-secondary" href="{{ url_for('login_page') }}">Login</a>
-            </div>
+            {{ form.submit(class="btn btn-m btn-block btn-primary") }}
+           
+            <br>
 
-            {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
 
         </form>
+        
+        <div class="checkbox mb-3">
+            <h6 style='color: white; margin-top: 2em;'>Already have an account?</h6>
+            <a class="btn btn-sm btn-secondary" href="{{ url_for('login_page') }}">Login</a>
+        </div>
+
     </div>
 </body>
 {% endblock %}

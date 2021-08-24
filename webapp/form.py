@@ -7,7 +7,7 @@ from webapp.models import User
 class LoginForm(FlaskForm):
     username = StringField(label='User Name:', validators=[DataRequired()])
     password = PasswordField(label='Password:', validators=[DataRequired()])
-    submit = SubmitField(label='Sign in')
+    submit = SubmitField(label='Log In')
 
 
 class RegisterForm(FlaskForm):

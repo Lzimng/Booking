@@ -7,202 +7,53 @@
 
 {% block content %}
 
-        <section class="HPLC">
-                <h2>HPLC</h2>
+    <!-- <div id='calendar-container'>
+        <div id='calendar'></div>
+    </div> -->
+    <style>
+        .table td, tr{
+            text-align: center;
+        }
+        .table-hover tbody tr:hover td {
+            background: rgb(106, 124, 124);
+        }
+    </style>
+
+    <div class="container" style="margin-top: 20%;">
+        <h2 class='mt-2' style = "color:white">HPLC</h1>
                 
-                <table >
-                    <thead>
-                        <tr>
-                        <th width=10%>ID</th>
-                        <th width=10%>Current Status</th>
-                        <th >Next Available Date</th>
-                        <th >Cal. Due</th> 
-                        <th width=15%>Details</th> 
-                        <th width=15%>Book</th> 
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        {% for hplc in all_HPLCs %}
-                        {% include 'includes/detail_modals.html' %}
-                        <tr>
-                        <td> {{ hplc.ins_name }} </td>
-                        <td><img class="status_img" src="{{ url_for('static', filename='images/red.png') }}"> </td>
-                        <td> {{ hplc.cal_due }}  </td>
-                        <td>In 2 days (Aug. 06)</td>
-                        <td> <button  data-toggle="modal" data-target="#Modal-MoreInfo-{{ hplc.id }}">More Info</button> </td>
-                        <td><button class="btn btn-outline btn-success">Book this Instrument</button></td>
-                        </tr>
-                        {% endfor %}
-
-                    </tbody>
-                  </table>
-        </section>
-
-        <section class="HPLC">
-            <h2>UPLC</h2>
-            
-            <table >
-                <thead>
-                    <tr>
-                    <th width=10%>ID</th>
-                    <th width=10%>Current Status</th>
-                    <th width=20%>Next Available Date</th>
-                    <th width=20%>Cal. Due</th> 
-                    <th>Details</th> 
-                    <th>Book</th> 
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td>Jill</td>
-                    <td>Jill</td>
-                    <td>Smith</td>
-                    <td>50</td>
-                    <td>50</td>
-                    <td>50</td>
-                    </tr>
-
-                    <tr>
-                        <td>Jill</td>
-                        <td>Jill</td>
-                        <td>Smith</td>
-                        <td>50</td>
-                        <td>50</td>
-                        <td>50</td>
-                    </tr>
-
-
-                    <tr>
-                        <td>Jill</td>
-                        <td>Jill</td>
-                        <td>Smith</td>
-                        <td>50</td>
-                        <td>50</td>
-                        <td>50</td>
-                    </tr>
-                </tbody>
-              </table>
-    </section>
-
-    <section class="HPLC">
-        <h2>Dissolution Bath</h2>
-        
-        <table >
+        <table class='table table-hover' style="color: white;">
             <thead>
                 <tr>
-                <th width=10%>ID</th>
-                <th width=10%>Current Status</th>
-                <th width=20%>Next Available Date</th>
-                <th width=20%>Cal. Due</th> 
-                <th>Details</th> 
-                <th>Book</th> 
+                <th scope='col'>ID</th>
+                <th scope='col'>Current Status</th>
+                <th scope='col'>Next Available Date</th>
+                <th scope='col'>Cal. Due</th> 
+                <th scope='col'>Details</th> 
+                <th scope='col'>Book</th> 
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                <td>Jill</td>
-                <td>Jill</td>
-                <td>Smith</td>
-                <td>50</td>
-                <td>50</td>
-                <td>50</td>
-                </tr>
 
-                <tr>
-                    <td>Jill</td>
-                    <td>Jill</td>
-                    <td>Smith</td>
-                    <td>50</td>
-                    <td>50</td>
-                    <td>50</td>
-                </tr>
+                {% for hplc in all_HPLCs %}
+                {% include 'includes/detail_modals.html' %}
+                {% include 'includes/book_modals.html' %}
 
-
-                <tr>
-                    <td>Jill</td>
-                    <td>Jill</td>
-                    <td>Smith</td>
-                    <td>50</td>
-                    <td>50</td>
-                    <td>50</td>
+                <tr scope='row'>
+                <td> {{ hplc.ins_name }} </td>
+                <td><img style="width: 25px;" src="{{ url_for('static', filename='images/red.png') }}"> </td>
+                <td> {{ hplc.cal_due }}  </td>
+                <td>In 2 days (Aug. 06)</td>
+                <td> <button type="button" class="btn btn-info" data-toggle="modal" data-target="#Modal-MoreInfo-{{ hplc.id }}">More Info</button> </td>
+                <td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal-Book-{{ hplc.id }}">Book this Instrument</button></td>
                 </tr>
+                {% endfor %}
+
             </tbody>
           </table>
-    </section>
-
-    <section class="HPLC">
-        <h2>Karl Fischer</h2>
-        
-        <table >
-            <thead>
-                <tr>
-                <th width=10%>ID</th>
-                <th width=10%>Current Status</th>
-                <th width=20%>Next Available Date</th>
-                <th width=20%>Cal. Due</th> 
-                <th>Details</th> 
-                <th>Book</th> 
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <td>Jill</td>
-                <td>Jill</td>
-                <td>Smith</td>
-                <td>50</td>
-                <td>50</td>
-                <td>50</td>
-                </tr>
-
-                <tr>
-                    <td>Jill</td>
-                    <td>Jill</td>
-                    <td>Smith</td>
-                    <td>50</td>
-                    <td>50</td>
-                    <td>50</td>
-                </tr>
+    </div>
 
 
-                <tr>
-                    <td>Jill</td>
-                    <td>Jill</td>
-                    <td>Smith</td>
-                    <td>50</td>
-                    <td>50</td>
-                    <td>50</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
 
-
-    <section class="HPLC">
-        <h5>Legend</h4>
-        <table class='legend'>
-                <tr>
-                <td>Busy:</td>
-                <td><img class="status_img" src="{{ url_for('static', filename='images/red.png') }}"> </td>
-                <td>Available:</td>
-                <td><img class="status_img" src="{{ url_for('static', filename='images/green.png') }}"> </td>
-                <td>Maintiance:</td>
-                <td><img class="status_img" src="{{ url_for('static', filename='images/silver.png') }}"> </td>
-                </tr>
-        </table>
-    </section>
-
-    <!-- <script>
-        // document.getElementById('button').addEventListener("click", function() {
-        //     document.querySelector('.bg-modal').style.display = "flex";
-        // });
-        
-        function detail_function(){
-            document.querySelector('.bg-modal').style.display = "flex";
-        }
-
-        document.querySelector('.close').addEventListener("click", function() {
-            document.querySelector('.bg-modal').style.display = "none";
-        });
-    </script> -->
 {% endblock %}
+

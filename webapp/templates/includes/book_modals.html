@@ -1,0 +1,110 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/main.min.css">
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/main.min.js'></script>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    // initialView: 'listWeek',
+    initialDate: '2021-07-07',
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+    },
+    height: 650,
+    contentHeight: 600,
+    events: [
+      {
+        title: 'All Day Event',
+        start: '2021-07-01'
+      },
+      {
+        title: 'Long Event',
+        start: '2021-07-07',
+        end: '2021-07-10'
+      },
+      {
+        groupId: '999',
+        title: 'Repeating Event',
+        start: '2021-07-09T16:00:00'
+      },
+      {
+        groupId: '999',
+        title: 'Repeating Event',
+        start: '2021-07-16T16:00:00'
+      },
+      {
+        title: 'Conference',
+        start: '2021-07-11',
+        end: '2021-07-13'
+      },
+      {
+        title: 'Meeting',
+        start: '2021-07-12T10:30:00',
+        end: '2021-07-12T12:30:00'
+      },
+      {
+        title: 'Lunch',
+        start: '2021-07-12T12:00:00'
+      },
+      {
+        title: 'Meeting',
+        start: '2021-07-12T14:30:00'
+      },
+      {
+        title: 'Birthday Party',
+        start: '2021-07-13T07:00:00'
+      },
+      {
+        title: 'Click for Google',
+        url: 'http://google.com/',
+        start: '2021-07-28'
+      }
+    ]
+  });
+
+  calendar.render();
+});
+
+
+</script>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="Modal-Book-{{ hplc.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+
+  <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
+  <div class="modal-dialog modal-dialog-centered modal-fullscreen modal-dialog-scrollable" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{ hplc.ins_name }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- <div class="modal-body"> -->
+        <div class='card'>
+          <div id='calendar' style="display:unset;"></div>
+        </div>
+      <!-- </div> -->
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

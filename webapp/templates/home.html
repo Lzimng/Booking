@@ -5,14 +5,14 @@
 
 {% block content %}
 
-    <main class="home">
-        <h1 style='text-align:center; color: white; padding: 20em 0 0 0;'>Welcome!</h1>
+    <main class="home" style='margin-top: 20%;'>
+        <h1 style='text-align:center; color: white;'>Welcome!</h1>
         <p class="lead" style='text-align: center; width: 400px; height:100px; margin: 0 auto; color: white;'> Thank you for using Frontida Analytical Research and development instrument booking system. Please log in to your account first.</p>
-        <p style='text-align: center; width: 400px; height:100px; margin: 1em auto; color: white;'>
+        <p style='text-align: center; width: 400px; height:100px; margin: 2em auto; color: white;'>
 
         <a href="{{ url_for('login_page') }}" style="font-size: 16; background-color: white; color:#212529; font-weight: bold; border-radius: 0.5em; padding: 6px;">Log In</a></p>
-        <p class="lead" style='text-align: center; margin: 0 auto; color: white;'>Do not have an account yet?</p>
 
+        <p class="lead" style='text-align: center; margin: 0 auto; color: white;'>Do not have an account yet?</p>
         <p style='text-align: center; margin: 1em auto; color: white;'>
         <a href="{{ url_for('register_page') }}" style="font-size: 16; background-color: white; color:#212529; font-weight: bold; border-radius: 0.5em; padding: 6px;">New Account</a></p>
     
