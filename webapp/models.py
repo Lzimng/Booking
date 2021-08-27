@@ -26,17 +26,25 @@ class User(db.Model, UserMixin):
 
 class Record(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
-    start = db.Column(db.DateTime(timezone=True), nullable=False)
-    end = db.Column(db.DateTime(timezone=True), nullable=False)
-    note = db.Column(db.String(length=1024), nullable=True, unique=True)
+    start = db.Column(db.DateTime(timezone=True), nullable=True)
+    ins_name = db.Column(db.String(length=1024), nullable=False, unique=False)
+    note = db.Column(db.String(length=1024), nullable=True, unique=False)
     owner_user = db.Column(db.Integer(), db.ForeignKey('user.id'))
-    owner_ins = db.Column(db.Integer(), db.ForeignKey('instrument.id'))
+
+    def booked_by(self, user):
+        self.owner_user = user.id
+        db.session.commit()
+    # end = db.Column(db.DateTime(timezone=True), nullable=False)
+    # owner_ins = db.Column(db.Integer(), db.ForeignKey('instrument.id'))
+    def remove(self):
+        db.session.delete(self)
+        db.session.commit()
 
 class Instrument(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     ins_type = db.Column(db.String(length=100), nullable=False)
     ins_name = db.Column(db.String(length=30), nullable=False, unique=True)
-    history =  db.relationship('Record', backref='owned_ins', lazy=True)
+    # history =  db.relationship('Record', backref='owned_ins', lazy=True)
     note = db.Column(db.String(length=1024))
     cal_due = db.Column(db.DateTime(timezone=True))
     
