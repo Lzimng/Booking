@@ -18,6 +18,7 @@
 
 
 <div class="container" style="margin-top: 20%;">
+    <h2 class='text-center' style = "color:white">Upcoming Events for <span style='color: coral; font-weight: bold; font-style: italic;'>{{current_user.username}}</span></h2>
     <h2 class='mt-2' style = "color:white">HPLC</h2>
 
     <table class='table table-hover' style="color: white;">
@@ -28,7 +29,7 @@
             <th scope='col'>Remove</th> 
             </tr>
         </thead>
-    {% for record in all_reservations %}   
+    {% for record in upcoming_reservations %}   
     <form method="POST">
         <tbody>
             <tr scope='row'>
@@ -42,7 +43,6 @@
         </tbody>
     </form>
     {% endfor %}
-    
       </table>
 
 </div>

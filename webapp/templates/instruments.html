@@ -7,9 +7,7 @@
 
 {% block content %}
 
-    <!-- <div id='calendar-container'>
-        <div id='calendar'></div>
-    </div> -->
+
     <style>
         .table td, tr{
             text-align: center;
@@ -18,8 +16,6 @@
             background: rgb(106, 124, 124);
         }
     </style>
-
-
 
 
     <div class="container" style="margin-top: 20%;">
@@ -44,9 +40,9 @@
                 <tr scope='row'>
                 <td> {{ hplc.ins_name }} </td>
                 {% if today in color_events[hplc.ins_name] %}
-                    <td><img style="width: 25px;" src="{{ url_for('static', filename='images/green.png') }}"> </td>
-                {% else %}
                     <td><img style="width: 25px;" src="{{ url_for('static', filename='images/red.png') }}"> </td>
+                {% else %}
+                    <td><img style="width: 25px;" src="{{ url_for('static', filename='images/green.png') }}"> </td>
                 {% endif %}
                 
                 <td> {{ hplc.cal_due }}  </td>
