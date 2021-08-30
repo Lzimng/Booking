@@ -1,3 +1,9 @@
+Introduction:
+This is an instrument booking system. Users can register, log in/out, view instrument status, check available date,
+make/cancel a reservation, view all reservation made by the current user, and send email reminder for the upcoming 
+events (email function is configured in a separate repo).
+
+
 Instrusction:
 1. git clone https://github.com/Lzimng/Booking.git
 
