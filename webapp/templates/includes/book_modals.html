@@ -20,14 +20,10 @@
     
       var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        // initialView: 'listWeek',
         initialDate: '2021-07-07',
         allDay : true,
         displayEventTime: false,
         borderColor: '#378006',
-        // eventBackgroundColor:'green',
-        // eventColor: '#378006',
-        // color: 'blue',
         headerToolbar: { 
           left: 'prev,next',
           center: 'title',
@@ -39,8 +35,6 @@
           {
             title: '{{ event.user }}',
             start: '{{ event.date_start }}',
-            // color: 'purple',
-            // backgroundColor:'black', 
           },
           {% endfor %}
         ],

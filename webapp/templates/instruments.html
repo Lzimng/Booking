@@ -39,7 +39,7 @@
 
                 <tr scope='row'>
                 <td> {{ hplc.ins_name }} </td>
-                {% if today in color_events[hplc.ins_name] %}
+                {% if today in today_future_events_all_Ins[hplc.ins_name] %}
                     <td><img style="width: 25px;" src="{{ url_for('static', filename='images/red.png') }}"> </td>
                 {% else %}
                     <td><img style="width: 25px;" src="{{ url_for('static', filename='images/green.png') }}"> </td>

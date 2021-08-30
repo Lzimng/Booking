@@ -70,21 +70,35 @@ def register_page():
 @login_required
 def instruments_page():
 
-    # event_bucket send all events to the calendar for displaying prupose.
-    event_bucket = {}
     all_ins_name = set()
     for ins in Instrument.query.all():
         all_ins_name.add(ins.ins_name)
 
+    # event_bucket send all events to the calendar for displaying prupose.
+    event_bucket = {}
+
+    # To support the Current Status color change function.
+    d = date.today()
+    # d is in the data type of date, but the database stores the data in datatime.
+    # One cannot compare date to datetime, so here is the conversion.
+    today = datetime.combine(d, datetime.min.time())
+    today_future_events_all_Ins = {}
+
+    # today_future_events_all_Ins is in the format of: {'ins_name': [events of that instrument]}
     for ins_name in all_ins_name:
-        events = []
+        all_events = []
+        today_future_events_this_Ins = set()
         all_books = Record.query.filter_by(ins_name=ins_name)
         for book in all_books:
             curr = {}
             curr["user"] = User.query.filter_by(id=book.owner_user).first().username
             curr["date_start"] = book.start
-            events.append(curr)
-        event_bucket[ins_name] = events
+            all_events.append(curr)
+
+            if book.start >= today:
+                today_future_events_this_Ins.add(book.start)
+        event_bucket[ins_name] = all_events
+        today_future_events_all_Ins[ins_name] = today_future_events_this_Ins
 
     # Read the booking request from the form and save them into the database in the unit of 1 day.
     form = BookingForm()
@@ -96,10 +110,21 @@ def instruments_page():
         total_booked = (end_date - start_date).days + 1
 
         for i in range(total_booked):
-            new_record = Record(start=start_date + timedelta(days=i), ins_name=ins_name)
-            db.session.add(new_record)
-            db.session.commit()
-            new_record.booked_by(current_user)
+
+            bookdate = start_date + timedelta(days=i)
+            bookdate = datetime.combine(bookdate, datetime.min.time())
+
+            # Check if the date has already been booked
+            if bookdate in today_future_events_all_Ins[ins_name]:
+                flash(f"{bookdate} was booked by other people.")
+                db.session.rollback()
+                break
+            else:
+                new_record = Record(
+                    start=bookdate, ins_name=ins_name, owner_user=current_user.id
+                )
+                db.session.add(new_record)
+        db.session.commit()
 
         return redirect(url_for("instruments_page"))
 
@@ -108,21 +133,6 @@ def instruments_page():
         for err_msg in form.errors.values():
             flash(f"Error: {err_msg}", category="danger")
 
-    # To support the Current Status color change function.
-    d = date.today()
-    # d is in the data type of date, but the database stores the data in datatime.
-    # One cannot compare date to datetime, so here is the conversion.
-    today = datetime.combine(d, datetime.min.time())
-    color_events = {}
-
-    # color_event{'ins_name': [events of that instrument]}
-    for ins_name in all_ins_name:
-        events = set()
-        all_books = Record.query.filter_by(ins_name=ins_name)
-        for event in all_books:
-            events.add(event.start)
-        color_events[ins_name] = events
-
     all_HPLCs = Instrument.query.filter_by(ins_type="HPLC")
     return render_template(
         "instruments.html",
@@ -130,7 +140,7 @@ def instruments_page():
         event_bucket=event_bucket,
         form=form,
         today=today,
-        color_events=color_events,
+        today_future_events_all_Ins=today_future_events_all_Ins,
     )
 
 
